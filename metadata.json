@@ -1,0 +1,6 @@
+{
+  "name": "Baca3D: Pemimpin Cilik — Dunia Membaca Interaktif",
+  "description": "Aplikasi membaca interaktif bergamifikasi ala Google Read Along, Lingokids & dunia 3D Roblox untuk teks Pemimpin Cilik dengan penilaian intonasi, kotak misteri (Blind Box), papan pendahulu, dan rekod TP Murid masa nyata.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

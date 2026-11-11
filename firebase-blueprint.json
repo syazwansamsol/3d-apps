@@ -1,0 +1,187 @@
+{
+  "entities": {
+    "StudentProfile": {
+      "title": "StudentProfile",
+      "description": "Public student literacy profile, TP Murid mastery progress, tokens, badges, and 3D avatar customization state.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth UID of the student owner",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Student display name shown on leaderboard and 3D avatar tag",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "className": {
+          "type": "string",
+          "description": "School class name (e.g. 6 Bestari)",
+          "minLength": 1,
+          "maxLength": 30
+        },
+        "tokens": {
+          "type": "number",
+          "description": "Current virtual reward tokens earned from clear reading and intonation"
+        },
+        "totalXp": {
+          "type": "number",
+          "description": "Cumulative XP score for leaderboard ranking"
+        },
+        "tpLevel": {
+          "type": "number",
+          "description": "Current Tahap Penguasaan (TP 1 to TP 6)"
+        },
+        "avgClarity": {
+          "type": "number",
+          "description": "Average reading clarity percentage (0 to 100)"
+        },
+        "avgIntonation": {
+          "type": "number",
+          "description": "Average reading intonation score percentage (0 to 100)"
+        },
+        "completedParagraphs": {
+          "type": "array",
+          "description": "List of completed paragraph IDs (max 15)"
+        },
+        "completedCheckpoints": {
+          "type": "array",
+          "description": "List of visited 3D world responsibility stations (max 10)"
+        },
+        "unlockedBadges": {
+          "type": "array",
+          "description": "List of unlocked badge IDs (max 20)"
+        },
+        "unlockedAccessories": {
+          "type": "array",
+          "description": "List of unlocked 3D avatar accessory IDs from Blind Box (max 30)"
+        },
+        "equippedHat": {
+          "type": "string",
+          "description": "Currently equipped hat accessory ID",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "equippedTie": {
+          "type": "string",
+          "description": "Currently equipped tie accessory ID",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "equippedBack": {
+          "type": "string",
+          "description": "Currently equipped back/wing accessory ID",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "equippedGlasses": {
+          "type": "string",
+          "description": "Currently equipped glasses accessory ID",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "rumusanAnswer": {
+          "type": "string",
+          "description": "Student answer for the Pemimpin Cilik rumusan activity",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of last profile update"
+        }
+      },
+      "required": [
+        "uid",
+        "displayName",
+        "className",
+        "tokens",
+        "totalXp",
+        "tpLevel",
+        "avgClarity",
+        "avgIntonation",
+        "completedParagraphs",
+        "completedCheckpoints",
+        "unlockedBadges",
+        "unlockedAccessories",
+        "equippedHat",
+        "equippedTie",
+        "equippedBack",
+        "equippedGlasses",
+        "rumusanAnswer",
+        "updatedAt"
+      ]
+    },
+    "ReadingLog": {
+      "title": "ReadingLog",
+      "description": "Individual reading session log capturing clarity, intonation, and tokens earned.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth UID of the student",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "studentName": {
+          "type": "string",
+          "description": "Student display name",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "paragraphId": {
+          "type": "string",
+          "description": "ID of the paragraph read",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "clarityScore": {
+          "type": "number",
+          "description": "Clarity score from 0 to 100"
+        },
+        "intonationScore": {
+          "type": "number",
+          "description": "Intonation score from 0 to 100"
+        },
+        "tokensEarned": {
+          "type": "number",
+          "description": "Tokens awarded for this reading attempt"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of the reading attempt"
+        }
+      },
+      "required": [
+        "uid",
+        "studentName",
+        "paragraphId",
+        "clarityScore",
+        "intonationScore",
+        "tokensEarned",
+        "createdAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/students/{studentId}": {
+      "schema": {
+        "$ref": "#/entities/StudentProfile"
+      },
+      "description": "Stores student profile, real-time TP Murid mastery level, tokens, avatar state, and leaderboard stats."
+    },
+    "/reading_logs/{logId}": {
+      "schema": {
+        "$ref": "#/entities/ReadingLog"
+      },
+      "description": "Stores reading voice & intonation logs per student."
+    }
+  }
+}
